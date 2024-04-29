@@ -127,13 +127,13 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: #PATH TO YOUR WORDPRESS#
+      device: '/home/code/Inception/wordpress'
   mariadb:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: #PATH TO YOUR MARIADB#
+      device: '/home/code/Inception/mariadb'
 
 networks:
   inception:
