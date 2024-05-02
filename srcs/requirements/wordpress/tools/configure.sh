@@ -1,6 +1,10 @@
 #!bin/bash
 
-sleep 3
+while ! mariadb -h"mariadb" -u$SQL_USER -p$SQL_PASSWORD $SQL_DATABASE &>/dev/null; do
+	echo "Waiting for MariaDB configuration..."
+	sleep 2
+
+done
 
 if [ ! -e /var/www/html/wordpress/wp-config.php ]; then
 
@@ -15,15 +19,17 @@ if [ ! -e /var/www/html/wordpress/wp-config.php ]; then
 						--path="/var/www/html/wordpress" \
 						--allow-root
 
-	wp core install		--url=localhost/ \
+	wp core install		--url=${DOMAIN_NAME} \
 						--title=${SITE_TITLE} \
 						--admin_user=${ADMIN_USER} \
 						--admin_password=${ADMIN_PASSWORD} \
 						--admin_email=${ADMIN_EMAIL} \
+						--skip-email \
 						--path="/var/www/html/wordpress" \
 						--allow-root
 
 	wp user create		${USER1_LOGIN} \
+						${USER1_MAIL} \
 						--user_pass=${USER1_PASS} \
 						--role=subscriber \
 						--display_name=${USER1_LOGIN} \
@@ -31,27 +37,18 @@ if [ ! -e /var/www/html/wordpress/wp-config.php ]; then
 						--path="/var/www/html/wordpress" \
 						--allow-root
 
-	chmod -R 755 wp-content/uploads/
-	chmod -R 755 wp-content/plugins/
-	chmod -R 755 wp-content/themes/
-
 	wp plugin install	redis-cache --activate --allow-root
 
 	wp plugin update	--all --allow-root
-
-	wp theme install	"bravada" \
-						--path="/var/www/html/wordpress" \
-						--activate \
-						--allow-root
-
-	wp theme status		"bravada" --allow-root
 
 	wp config set WP_REDIS_HOST redis --add --type=constant --allow-root
 
 	wp config set WP_REDIS_PORT 6379 --add --type=constant --allow-root
 
-fi
+	chmod 755 /var/www/html/wordpress/wp-content
 
-wp redis enable --allow-root
+	wp redis enable --allow-root
+
+fi
 
 exec /usr/sbin/php-fpm82 -F

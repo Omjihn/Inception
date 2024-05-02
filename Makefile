@@ -6,7 +6,7 @@
 #    By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/29 11:57:18 by gbricot           #+#    #+#              #
-#    Updated: 2024/04/29 15:22:49 by gbricot          ###   ########.fr        #
+#    Updated: 2024/05/02 19:18:49 by gbricot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,21 +14,25 @@ NAME = Inception
 
 YAML = ./srcs/docker-compose.yml
 
+DOMAIN_NAME = $(shell awk -F '=' '/^DOMAIN_NAME/ {print $2}' './srcs/.env')
+
 $(NAME): build start
 
 Inception-logs: build start-logs
 
-build: check_root
+build:
 	@docker-compose -f $(YAML) build
 
-start: check_root
+start:
 	@docker-compose -f $(YAML) up --detach
 
-start-logs: check_root
+start-logs:
 	@docker-compose -f $(YAML) up
 
-stop: check_root
+stop:
 	-@docker-compose -f $(YAML) stop
+
+restart : stop start
 
 remove: stop
 	-@docker rm	nginx \
@@ -61,13 +65,13 @@ remove-all: stop
 		exit; \
 	fi
 
-logs: check_root
+logs:
 	@docker-compose -f $(YAML) logs
 
-docker-list: check_root
+docker-list:
 	@docker ps -a
 
-docker-image: check_root
+docker-image:
 	@docker images
 
 re: remove $(NAME)
@@ -79,6 +83,7 @@ help:
 	"- build: Simply builds the project.\n" \
 	"- start: Simply starts the project.\n" \
 	"- stop: Simply stops the project.\n" \
+	"- restart: Simply stops and start the project.\n" \
 	"- remove: Stops the project and deletes all previously built images.\n" \
 	"- logs: Prints all the logs from the project.\n" \
 	"- docker-list: Prints all Docker images found on the system (not only from the project).\n" \
@@ -87,7 +92,23 @@ help:
 
 ###		CHECKS		###
 
-check_root:
-    ifneq ($(shell whoami),root)
-        $(error You must run this Makefile as root)
-    endif
+check_domain:
+	@if [ -f ./srcs/.env ]; then \
+		domain_name="$$(awk -F '=' '/^DOMAIN_NAME/ {print $$2}' ./srcs/.env)"; \
+		if [ -n "$$domain_name" ]; then \
+			if ! grep -q "^127\.0\.0\.1.*\b$$domain_name\b" /etc/hosts; then \
+				echo "127.0.0.1 $$domain_name" | tee -a /etc/hosts > /dev/null; \
+			fi; \
+		else \
+			$(error Error: Please set the DOMAIN_NAME in the .env file.); \
+		fi; \
+	else \
+		$(error Error: .env file is missing. Please recover the repo.); \
+	fi
+
+info_root:
+	echo "$$domain_name Reminder: please run this makefile as root user."
+
+check: info_root check_domain 
+
+.DEFAULT_GOAL := check

@@ -14,7 +14,7 @@ RUN		apk update ; apk upgrade ; \
 
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
-COPY static_website/ /var/www/html
+COPY static_website/ /var/www/html/wordpress/
 
 EXPOSE 443
 

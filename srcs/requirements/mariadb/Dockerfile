@@ -2,8 +2,8 @@
 FROM	alpine:3.19.1
 
 RUN	apk update && apk upgrade && apk add --no-cache \
-        mariadb \
-        mariadb-client
+		mariadb \
+		mariadb-client
 
 COPY tools/configure.sh /tmp/configure.sh
 RUN		chmod +x /tmp/configure.sh

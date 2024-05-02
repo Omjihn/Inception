@@ -10,4 +10,4 @@ if [ ! -f "/etc/redis.conf.bak" ]; then
 
 fi
 
-redis-server --protected-mode no
+redis-server /etc/redis.conf --protected-mode no

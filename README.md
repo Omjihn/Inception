@@ -56,6 +56,7 @@ This helps us betterunderstand what Docker really is and how to 'dockerize' our 
 - `build`: Simply builds the project.
 - `start`: Simply starts the project.
 - `stop`: Simply stops the project.
+- `restart`: Simply stops and start the project.
 - `remove`: Stops the project and deletes all previously built images.
 - `logs`: Prints all the logs from the project.
 - `docker-list`: Prints all Docker images found on the system (not only from the project).
