@@ -3,7 +3,7 @@
 </h1>
 
 ### Introduction
-This project is an initiation to Docker. You can find the subject PDF [here](subject/Inception_subject_apr_2024.pdf).
+This project is an initiation to Docker. You can find the subject PDF [here](https://github.com/Omjihn/Inception/files/15198252/Inception_subject.pdf)
 
 ### Alpine Linux
 All the docker in this project are using Alpine Linux.
@@ -33,7 +33,7 @@ This helps us betterunderstand what Docker really is and how to 'dockerize' our 
 
 ## Here's the subject schema but with the bonus part added:
 
-![bonus_schema](https://github.com/Omjihn/Inception/blob/main/subject/Schema_Inception_bonus.png)
+![Schema_Inception_bonus](https://github.com/Omjihn/Inception/assets/110061001/26c1c58a-cda5-4d01-99f2-ef8c22c44b47)
 
 ### How to build the project ?
 
