@@ -31,7 +31,7 @@ if [ ! -e /var/www/html/wordpress/wp-config.php ]; then
 	wp user create		${USER1_LOGIN} \
 						${USER1_MAIL} \
 						--user_pass=${USER1_PASS} \
-						--role=subscriber \
+						--role="contributor" \
 						--display_name=${USER1_LOGIN} \
 						--porcelain \
 						--path="/var/www/html/wordpress" \

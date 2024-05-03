@@ -83,6 +83,7 @@ If you see `docker: command not found`, install them using the following command
 - `stop`: Simply stops the project.
 - `restart`: Simply stops and start the project.
 - `remove`: Stops the project and deletes all previously built images.
+- `remove-all`: Stops the project and deletes every images, containers or networks.
 - `logs`: Prints all the logs from the project.
 - `docker-list`: Prints all Docker images found on the system (not only from the project).
 - `re`: Stops the project, removes it, rebuilds it, and starts it again.
