@@ -36,12 +36,30 @@ This helps us betterunderstand what Docker really is and how to 'dockerize' our 
 
 ![Schema_Inception_bonus](https://github.com/Omjihn/Inception/assets/110061001/26c1c58a-cda5-4d01-99f2-ef8c22c44b47)
 
+### Requirements:
+
+- Just check is you have docker and docker-compose:
+
+		docker --version
+  		docker-compose --version
+  
+- if it prints you `docker: command not found`, then install them with the following command (for Debian/Ubuntu):
+
+
+		sudo apt install docker docker-compose
+
+
+
 ### How to build the project ?
 
 1. **Environment Configuration:**
    - Rename the `.env_template` file to `.env`.
    - Fill in all the variables. For the Ngrok token, you need to create an account on the website.
    - In the file `nginx.conf` located in `srcs/requirements/nginx/conf/` make sure to remplace the server name by your own domain name.
+   - Then add to the file `/etc/hosts` 127.0.0.1 $DOMAIN_NAME. You can do it with the following command just remplace $DOMAIN_NAME with your real one:
+   
+   			echo "127.0.0.1 $DOMAIN_NAME" | sudo tee -a /etc/hosts
+
 
 2. **Docker Compose Configuration:**
    - Add paths to the `docker-compose.yml` file for the volumes of your database and Wordpress. Ensure the paths exist and are empty.
