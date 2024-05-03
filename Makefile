@@ -6,7 +6,7 @@
 #    By: gbricot <gbricot@student.42perpignan.fr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/29 11:57:18 by gbricot           #+#    #+#              #
-#    Updated: 2024/05/02 19:18:49 by gbricot          ###   ########.fr        #
+#    Updated: 2024/05/03 10:14:16 by gbricot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,9 @@ NAME = Inception
 
 YAML = ./srcs/docker-compose.yml
 
-DOMAIN_NAME = $(shell awk -F '=' '/^DOMAIN_NAME/ {print $2}' './srcs/.env')
+$(NAME): info_root build start
 
-$(NAME): build start
-
-Inception-logs: build start-logs
+Inception-logs: info_root build start-logs
 
 build:
 	@docker-compose -f $(YAML) build
@@ -82,6 +80,7 @@ help:
 	"- Inception-logs: Build and start the containers with real-time logs displayed in your terminal. Press `Ctrl + C` to stop the project.\n" \
 	"- build: Simply builds the project.\n" \
 	"- start: Simply starts the project.\n" \
+	"- start-logs: Simply starts the project with real-time logs displayed in your terminal. Press `Ctrl + C` to stop the project."
 	"- stop: Simply stops the project.\n" \
 	"- restart: Simply stops and start the project.\n" \
 	"- remove: Stops the project and deletes all previously built images.\n" \
@@ -90,25 +89,7 @@ help:
 	"- re: Stops the project, removes it, rebuilds it, and starts it again.\n" \
 	"\rPlease note that you MUST start the Makefile as root."
 
-###		CHECKS		###
-
-check_domain:
-	@if [ -f ./srcs/.env ]; then \
-		domain_name="$$(awk -F '=' '/^DOMAIN_NAME/ {print $$2}' ./srcs/.env)"; \
-		if [ -n "$$domain_name" ]; then \
-			if ! grep -q "^127\.0\.0\.1.*\b$$domain_name\b" /etc/hosts; then \
-				echo "127.0.0.1 $$domain_name" | tee -a /etc/hosts > /dev/null; \
-			fi; \
-		else \
-			$(error Error: Please set the DOMAIN_NAME in the .env file.); \
-		fi; \
-	else \
-		$(error Error: .env file is missing. Please recover the repo.); \
-	fi
+###		INFO_PRINT		###
 
 info_root:
-	echo "$$domain_name Reminder: please run this makefile as root user."
-
-check: info_root check_domain 
-
-.DEFAULT_GOAL := check
+	@echo "Reminder: please run this makefile as root user."
