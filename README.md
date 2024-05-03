@@ -41,7 +41,7 @@ This helps us betterunderstand what Docker really is and how to 'dockerize' our 
 1. **Environment Configuration:**
    - Rename the `.env_template` file to `.env`.
    - Fill in all the variables. For the Ngrok token, you need to create an account on the website.
-   - In the file `nginx.conf` located in `srcs/requirements/nginx/conf/` make sure to remplace the server name by you'r own domain name.
+   - In the file `nginx.conf` located in `srcs/requirements/nginx/conf/` make sure to remplace the server name by your own domain name.
 
 2. **Docker Compose Configuration:**
    - Add paths to the `docker-compose.yml` file for the volumes of your database and Wordpress. Ensure the paths exist and are empty.
@@ -100,13 +100,13 @@ Please note that you MUST start the Makefile as root.
 - Then click "Quickconnect" it will tell's you that the ssl is self-signed. It's normal since you'r in local. Click Ok.
 - Now it displaying you all the content from the wordpress volume.
 
-**Ngrock:**
+**Ngrok:**
 
-- Considering you've already created a Ngrock account, login to the website.
+- Considering you've already created a Ngrok account, login to the website.
 - Go to your dashboard, then on endpoints.
 - Click on the URL, then enter. And it will redirect to your website.
 - Since this URL is temporary you will not be able to connect to your wordpress. The server can't know on wich URL redirects you it will then redirects you to your own domain name.
-- Now you'r maybe wondering why using Ngrock then. The URL it's giving you is accesible wordwide, so yo can have the page on your phone for example.
-- Please note that if you stop you'r project the URL will not work anymore. And every time you you start the projcet it will be a different URL.
+- Now you'r maybe wondering why using Ngrok then. The URL it's giving you is accesible wordwide, so you can have the page on your phone for example.
+- Please note that if you stop your project the URL will not work anymore. And every time you'r starting the projcet it will be a different URL.
 
 
