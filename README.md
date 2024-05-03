@@ -128,6 +128,6 @@ If you see `docker: command not found`, install them using the following command
 - Click on the URL, then enter. And it will redirect to your website.
 - Since this URL is temporary you will not be able to connect to your wordpress. The server can't know on wich URL redirects you it will then redirects you to your own domain name.
 - Ngrok provides a globally accessible URL, allowing you to view the page on your phone, for example.
-- Please note that if you stop your project the URL will not work anymore. And every time you'r starting the projcet it will be a different URL.
+- Please note that if you stop your project the URL will not work anymore. And every time you'r starting the projet it will be a different URL.
 
 
