@@ -50,6 +50,11 @@ remove: stop
 				srcs_ngrok \
 				alpine:3.19.1
 
+	-@docker volume rm	srcs_mariadb \
+				srcs_wordpress
+
+	-@docker network rm	srcs_inception 
+
 remove-all: stop
 	@echo "Do you really want to delete all your system stopped dockers and all your images ? [y/n]"
 	@read -r response; \
