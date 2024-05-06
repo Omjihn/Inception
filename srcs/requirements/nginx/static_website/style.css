@@ -30,7 +30,27 @@ body, html {
 	text-decoration: none;
 }
 
+
+
 .login-button:hover {
+	background-color: #0056b3;
+}
+
+.adminer-button {
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	background-color: #007bff;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	text-decoration: none;
+}
+
+
+
+.adminer-button:hover {
 	background-color: #0056b3;
 }
 
