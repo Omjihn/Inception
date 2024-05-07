@@ -7,7 +7,7 @@ This project is an initiation to Docker. You can find the subject PDF [here](htt
 
 ### Alpine Linux
 
-All the docker in this project are using Alpine Linux.
+All the dockers in this project are using Alpine Linux.
 
 ## Why this project ?
 The main goal of the project is to introduce people to Docker by guiding them to create their own containers. 
