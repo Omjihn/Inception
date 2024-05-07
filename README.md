@@ -97,6 +97,7 @@ If you see `docker: command not found`, install them using the following command
 **Access my website:**
 - Open your web browser and enter the domain name you have set at the environment configuration part.
 - Since it's a local website, even if the ssl certificate is enable, it will display a warning. click "continue anyway".
+- Here you have access to the Wordpress default page, you can go to `$DOMAIN_NAME/index.html` to access the static website.
 - You can access the Wordpress login page by clicking the login button. Use the login credentials you entered in your `.env` file as either admin or user.
 
 **Redis:**
@@ -105,7 +106,7 @@ If you see `docker: command not found`, install them using the following command
 
 **Adminer:**
 
-- With your browser go to `http://0.0.0.0:8080/adminer.php`.
+- Go to `$DOMAIN_NAME/index.html` then login adminer or with your browser go to `http://0.0.0.0:8080/adminer.php`.
 - Then to connect you need to put the database infos form the `.env`:
 
 ![Screenshot from 2024-05-03 10-46-32](https://github.com/Omjihn/Inception/assets/110061001/71897378-699d-4ea6-ae66-2beff5699cf2)
